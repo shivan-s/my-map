@@ -1,5 +1,6 @@
-<script>
-	import { places } from '$lib/places';
+<script lang="ts">
+	import Info from './Info.svelte';
+	import { places } from './places';
 	import 'maplibre-gl/dist/maplibre-gl.css';
 	import { onMount } from 'svelte';
 
@@ -15,9 +16,10 @@
 		});
 		places.forEach((p) => {
 			const h2 = `<h2>${p.title}</h2>`;
-			const html = p.body ? h2 + `<p>${p.body}</p>` : h2;
+			const html: string[] = [h2];
+			if (p.body) html.push(`<p>${p.body}</p>`);
 			const color = p.visited ? 'hsl(120 50% 50% / 1)' : 'hsl(1 50% 50% / 1)';
-			const popup = new m.Popup().setHTML(html);
+			const popup = new m.Popup().setHTML(html.join(''));
 			const marker = new m.Marker({ color }).setLngLat(p.lngLat).setPopup(popup);
 			marker.addTo(map);
 		});
@@ -33,6 +35,7 @@
 </svelte:head>
 
 <div id={containerId}></div>
+<Info />
 
 <style>
 	div {
