@@ -43,6 +43,12 @@
 		}
 	}
 	dialog {
+		max-width: 95dvw;
+		box-shadow: 0.5rem 0.5rem 5px 0.25rem hsl(1 0% 0% / 0.3);
+		color: darkslategrey;
+		background-color: snow;
+		border: 3px solid darkslategray;
+		border-radius: 1rem;
 		& > header {
 			display: flex;
 			align-items: center;
@@ -52,8 +58,18 @@
 				border: none;
 				text-decoration: underline;
 				cursor: pointer;
+				transition: color 0.3s ease-in-out;
+				&:hover,
+				&:active {
+					color: red;
+				}
 			}
 		}
-		max-width: 95dvw;
+		& > div {
+			padding: 1rem;
+		}
+		&::backdrop {
+			backdrop-filter: blur(3px);
+		}
 	}
 </style>
